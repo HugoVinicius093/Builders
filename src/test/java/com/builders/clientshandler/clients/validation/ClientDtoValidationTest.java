@@ -1,4 +1,4 @@
-package com.builders.clientshandler.clients;
+package com.builders.clientshandler.clients.validation;
 
 import com.builders.clientshandler.model.dto.ClientDTO;
 import lombok.extern.slf4j.Slf4j;
@@ -32,6 +32,7 @@ public class ClientDtoValidationTest {
 
     @BeforeAll
     public static void setUp() {
+        log.info("--- INICIANDO TESTES DE VALIDAÇÃO ---");
         ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
         validator = factory.getValidator();
         createListOfValidCpf();
