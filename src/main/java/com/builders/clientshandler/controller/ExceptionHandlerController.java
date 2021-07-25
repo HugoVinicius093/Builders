@@ -34,18 +34,10 @@ public class ExceptionHandlerController {
         return errors;
     }
 
-    //@ResponseStatus(HttpStatus.NOT_FOUND)
     @ExceptionHandler(ResponseStatusException.class)
     public ResponseEntity<String> handleValidationHttpNotFoundExceptions(ResponseStatusException ex, WebRequest webRequest) {
         log.error("Response Status Exception: ", ex.getReason());
         return new ResponseEntity<>(ex.getReason(), HttpStatus.resolve(ex.getStatus().value()));
     }
-
-/*    @ResponseStatus(HttpStatus.NOT_MODIFIED)
-    @ExceptionHandler(ResponseStatusException.class)
-    public ResponseEntity<String> handleValidationHttpNotModifiedExceptions(ResponseStatusException ex) {
-        log.error("Response Status Exception: ", ex.getReason());
-        return new ResponseEntity<>(ex.getReason(), HttpStatus.NOT_MODIFIED);
-    }*/
 
 }
