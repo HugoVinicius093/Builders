@@ -14,6 +14,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 @Slf4j
 @ControllerAdvice
@@ -24,7 +25,7 @@ public class ExceptionHandlerController {
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public Map<String, String> handleValidationExceptions(MethodArgumentNotValidException ex) {
-        log.error("Method Argument Not Valid Exception: ", ex.getMessage());
+        log.error("Method Argument Not Valid Exception: {}", ex.getMessage());
         Map<String, String> errors = new HashMap<>();
         ex.getBindingResult().getAllErrors().forEach(error -> {
             String fieldName = ((FieldError) error).getField();
@@ -35,9 +36,9 @@ public class ExceptionHandlerController {
     }
 
     @ExceptionHandler(ResponseStatusException.class)
-    public ResponseEntity<String> handleValidationHttpNotFoundExceptions(ResponseStatusException ex, WebRequest webRequest) {
-        log.error("Response Status Exception: ", ex.getReason());
-        return new ResponseEntity<>(ex.getReason(), HttpStatus.resolve(ex.getStatus().value()));
+    public ResponseEntity<String> handleValidationHttpNotFoundExceptions(ResponseStatusException ex) {
+        log.error("Response Status Exception: {}", ex.getReason());
+        return new ResponseEntity<>(ex.getReason(), Objects.requireNonNull(HttpStatus.resolve(ex.getStatus().value())));
     }
 
 }
