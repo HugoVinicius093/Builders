@@ -32,7 +32,7 @@ public class ClientDtoValidationTest {
 
     @BeforeAll
     public static void setUp() {
-        log.info("--- INICIANDO TESTES DE VALIDAÇÃO ---");
+        log.info("--- STARTING TESTS ON VALIDATION ---");
         ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
         validator = factory.getValidator();
         createListOfValidCpf();
