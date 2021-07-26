@@ -43,7 +43,7 @@ public class ExceptionHandlerController {
     @ExceptionHandler(DataIntegrityViolationException.class)
     public ResponseEntity<String> handleDataIntegrityViolationException(DataIntegrityViolationException ex) {
         log.error("Response Status Exception: {}", ex.getMessage());
-        return new ResponseEntity<>(ex.getMessage(), Objects.requireNonNull(HttpStatus.NOT_MODIFIED));
+        return new ResponseEntity<>(ex.getMessage(), Objects.requireNonNull(HttpStatus.UNPROCESSABLE_ENTITY));
     }
 
 }
