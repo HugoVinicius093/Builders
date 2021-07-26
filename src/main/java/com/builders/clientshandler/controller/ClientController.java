@@ -6,6 +6,7 @@ import com.builders.clientshandler.service.ClientService;
 import com.builders.clientshandler.service.exception.ClientException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -40,11 +41,7 @@ public class ClientController {
     @PostMapping(value = "/clients")
     public ResponseEntity<ClientDTO> createClient(@RequestBody @Valid ClientDTO clientDto) {
         log.info("Creating client.");
-        try {
-            return new ResponseEntity<>(clientService.createClient(clientDto.toClient()), HttpStatus.CREATED);
-        } catch (Exception ex) {
-            throw new ResponseStatusException(HttpStatus.NOT_MODIFIED, ex.getMessage());
-        }
+        return new ResponseEntity<>(clientService.createClient(clientDto.toClient()), HttpStatus.CREATED);
     }
 
     @PutMapping(value = "/clients")
