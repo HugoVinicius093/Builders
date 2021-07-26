@@ -1,6 +1,7 @@
 package com.builders.clientshandler.controller;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
@@ -37,6 +38,12 @@ public class ExceptionHandlerController {
     public ResponseEntity<String> handleValidationHttpNotFoundExceptions(ResponseStatusException ex) {
         log.error("Response Status Exception: {}", ex.getReason());
         return new ResponseEntity<>(ex.getReason(), Objects.requireNonNull(HttpStatus.resolve(ex.getStatus().value())));
+    }
+
+    @ExceptionHandler(DataIntegrityViolationException.class)
+    public ResponseEntity<String> handleDataIntegrityViolationException(DataIntegrityViolationException ex) {
+        log.error("Response Status Exception: {}", ex.getMessage());
+        return new ResponseEntity<>(ex.getMessage(), Objects.requireNonNull(HttpStatus.NOT_MODIFIED));
     }
 
 }
