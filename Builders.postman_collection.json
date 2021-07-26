@@ -1,0 +1,625 @@
+{
+	"info": {
+		"_postman_id": "5fee4935-2d94-4d19-ab52-d29bda5bc64e",
+		"name": "Builders",
+		"description": "Builders API - Cada pasta representa um ambiente (Cloud e Local) e cada uma tem seus respectivos end-points já configurados.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Cloud",
+			"item": [
+				{
+					"name": "FindAllPaginated",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://builder-api-test.herokuapp.com/v1/api/clients?size=5&page=0&sort=nome,asc",
+							"protocol": "https",
+							"host": [
+								"builder-api-test",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"v1",
+								"api",
+								"clients"
+							],
+							"query": [
+								{
+									"key": "size",
+									"value": "5"
+								},
+								{
+									"key": "page",
+									"value": "0"
+								},
+								{
+									"key": "sort",
+									"value": "nome,asc"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\": \"Presnel Kimpembe\",\r\n    \"cpf\": \"433.833.990-01\",\r\n    \"endereco\": \"Rua hge\",\r\n    \"cidade\": \"Cidade F\",\r\n    \"estado\": \"SP\",\r\n    \"cep\": \"19060-555\",\r\n    \"email\": \"Kimpembe@gmail.com\",\r\n    \"dataNascimento\": \"2021-08-13\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://builder-api-test.herokuapp.com/v1/api/clients",
+							"protocol": "https",
+							"host": [
+								"builder-api-test",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"v1",
+								"api",
+								"clients"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "FindByEmail",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://builder-api-test.herokuapp.com/v1/api/clients/by-email?email=AntonieGriezmann@gmail.com",
+							"protocol": "https",
+							"host": [
+								"builder-api-test",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"v1",
+								"api",
+								"clients",
+								"by-email"
+							],
+							"query": [
+								{
+									"key": "email",
+									"value": "AntonieGriezmann@gmail.com"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 16,\r\n    \"nome\": \"Antoine Griezmann da Silva\",\r\n    \"cpf\": \"88399806013\",\r\n    \"endereco\": \"Rua xpa\",\r\n    \"cidade\": \"Cidade U\",\r\n    \"estado\": \"RS\",\r\n    \"cep\": \"19060-999\",\r\n    \"email\": \"AntonieGriezmann@gmail.com\",\r\n    \"dataNascimento\": \"1991-03-21\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://builder-api-test.herokuapp.com/v1/api/clients",
+							"protocol": "https",
+							"host": [
+								"builder-api-test",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"v1",
+								"api",
+								"clients"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeleteById",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://builder-api-test.herokuapp.com/v1/api/clients/18",
+							"protocol": "https",
+							"host": [
+								"builder-api-test",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"v1",
+								"api",
+								"clients",
+								"18"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "FindByCpf",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://builder-api-test.herokuapp.com/v1/api/clients/by-cpf?cpf=27167518034",
+							"protocol": "https",
+							"host": [
+								"builder-api-test",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"v1",
+								"api",
+								"clients",
+								"by-cpf"
+							],
+							"query": [
+								{
+									"key": "cpf",
+									"value": "27167518034"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "FindByNomePaginated",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://builder-api-test.herokuapp.com/v1/api/clients/by-nome?nome=z&size=10&page=0&sort=nome,asc",
+							"protocol": "https",
+							"host": [
+								"builder-api-test",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"v1",
+								"api",
+								"clients",
+								"by-nome"
+							],
+							"query": [
+								{
+									"key": "nome",
+									"value": "z"
+								},
+								{
+									"key": "size",
+									"value": "10"
+								},
+								{
+									"key": "page",
+									"value": "0"
+								},
+								{
+									"key": "sort",
+									"value": "nome,asc"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "FindByCepPaginated",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://builder-api-test.herokuapp.com/v1/api/clients/by-cep?cep=19060&size=10&page=0&sort=cep,asc",
+							"protocol": "https",
+							"host": [
+								"builder-api-test",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"v1",
+								"api",
+								"clients",
+								"by-cep"
+							],
+							"query": [
+								{
+									"key": "cep",
+									"value": "19060"
+								},
+								{
+									"key": "size",
+									"value": "10"
+								},
+								{
+									"key": "page",
+									"value": "0"
+								},
+								{
+									"key": "sort",
+									"value": "cep,asc"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeleteAll",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://builder-api-test.herokuapp.com/v1/api/clients",
+							"protocol": "https",
+							"host": [
+								"builder-api-test",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"v1",
+								"api",
+								"clients"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Local",
+			"item": [
+				{
+					"name": "FindAllPaginated",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/v1/api/clients?size=5&page=0&sort=nome,asc",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"api",
+								"clients"
+							],
+							"query": [
+								{
+									"key": "size",
+									"value": "5"
+								},
+								{
+									"key": "page",
+									"value": "0"
+								},
+								{
+									"key": "sort",
+									"value": "nome,asc"
+								},
+								{
+									"key": "",
+									"value": "",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\": \"Presnel Kimpembe\",\r\n    \"cpf\": \"433.833.990-01\",\r\n    \"endereco\": \"Rua hge\",\r\n    \"cidade\": \"Cidade F\",\r\n    \"estado\": \"SP\",\r\n    \"cep\": \"19060-555\",\r\n    \"email\": \"Kimpembe@gmail.com\",\r\n    \"dataNascimento\": \"2021-08-13\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/v1/api/clients",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"api",
+								"clients"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "FindByEmail",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/v1/api/clients/by-email?email=AntonieGriezmann@gmail.com",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"api",
+								"clients",
+								"by-email"
+							],
+							"query": [
+								{
+									"key": "email",
+									"value": "AntonieGriezmann@gmail.com"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 3,\r\n    \"nome\": \"Antoine Griezmann da Silva\",\r\n    \"cpf\": \"88399806013\",\r\n    \"endereco\": \"Rua xpa\",\r\n    \"cidade\": \"Cidade U\",\r\n    \"estado\": \"RS\",\r\n    \"cep\": \"19060-999\",\r\n    \"email\": \"AntonieGriezmann@gmail.com\",\r\n    \"dataNascimento\": \"1991-03-21\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/v1/api/clients",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"api",
+								"clients"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeleteById",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/v1/api/clients/5",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"api",
+								"clients",
+								"5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "FindByCpf",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/v1/api/clients/by-cpf?cpf=27167518034",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"api",
+								"clients",
+								"by-cpf"
+							],
+							"query": [
+								{
+									"key": "cpf",
+									"value": "27167518034"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "FindByNomePaginated",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/v1/api/clients/by-nome?nome=z&size=10&page=0&sort=nome,asc",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"api",
+								"clients",
+								"by-nome"
+							],
+							"query": [
+								{
+									"key": "nome",
+									"value": "z"
+								},
+								{
+									"key": "size",
+									"value": "10"
+								},
+								{
+									"key": "page",
+									"value": "0"
+								},
+								{
+									"key": "sort",
+									"value": "nome,asc"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "FindByCepPaginated",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/v1/api/clients/by-cep?cep=19060&size=10&page=0&sort=cep,asc",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"api",
+								"clients",
+								"by-cep"
+							],
+							"query": [
+								{
+									"key": "cep",
+									"value": "19060"
+								},
+								{
+									"key": "size",
+									"value": "10"
+								},
+								{
+									"key": "page",
+									"value": "0"
+								},
+								{
+									"key": "sort",
+									"value": "cep,asc"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeleteAll",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/v1/api/clients",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"api",
+								"clients"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
