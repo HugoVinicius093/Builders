@@ -6,7 +6,6 @@ import com.builders.clientshandler.service.ClientService;
 import com.builders.clientshandler.service.exception.ClientException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -18,16 +17,24 @@ import org.springframework.web.server.ResponseStatusException;
 
 import javax.validation.Valid;
 
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
+
 @Slf4j
 @RestController
 @RequestMapping("/v1/api")
 public class ClientController {
 
+    private static final String DELETE = "Delete Client";
+
+    private static final String UPDATE = "Update Client";
+
+
     @Autowired
     private ClientService clientService;
 
     @GetMapping(value = "/clients")
-    public ResponseEntity<Page<Client>> getAllClients(@PageableDefault(size = 5,
+    public ResponseEntity<Page<ClientDTO>> getAllClients(@PageableDefault(size = 5,
             sort = "nome", direction = Sort.Direction.ASC) Pageable pageable) {
         log.info("Fetching clients.");
         Page<Client> clients = clientService.getAllClients(pageable);
@@ -35,13 +42,21 @@ public class ClientController {
         if (clients.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
-        return new ResponseEntity<>(clients, HttpStatus.OK);
+        return new ResponseEntity<>(clients.map(client -> {
+            ClientDTO clientDto = client.toDTO();
+            clientDto.add(linkTo(methodOn(ClientController.class).deleteClientById(clientDto.getId())).withRel((DELETE)));
+            clientDto.add(linkTo(methodOn(ClientController.class).updateClient(clientDto)).withRel((UPDATE)));
+            return clientDto;
+        }), HttpStatus.OK);
     }
 
     @PostMapping(value = "/clients")
     public ResponseEntity<ClientDTO> createClient(@RequestBody @Valid ClientDTO clientDto) {
         log.info("Creating client.");
-        return new ResponseEntity<>(clientService.createClient(clientDto.toClient()), HttpStatus.CREATED);
+        ClientDTO clientDtoResult = clientService.createClient(clientDto.toClient());
+        clientDtoResult.add(linkTo(methodOn(ClientController.class).deleteClientById(clientDtoResult.getId())).withRel((DELETE)));
+        clientDto.add(linkTo(methodOn(ClientController.class).updateClient(clientDto)).withRel((UPDATE)));
+        return new ResponseEntity<>(clientDtoResult, HttpStatus.CREATED);
     }
 
     @PutMapping(value = "/clients")
@@ -80,14 +95,17 @@ public class ClientController {
     public ResponseEntity<ClientDTO> findClientByCpf(@RequestParam(name = "cpf") String cpf) {
         log.info("Fetching client by cpf");
         try {
-            return new ResponseEntity<>(clientService.findClientByCpf(cpf).toDTO(), HttpStatus.OK);
+            ClientDTO clientDtoResult = clientService.findClientByCpf(cpf).toDTO();
+            clientDtoResult.add(linkTo(methodOn(ClientController.class).deleteClientById(clientDtoResult.getId())).withRel((DELETE)));
+            clientDtoResult.add(linkTo(methodOn(ClientController.class).updateClient(clientDtoResult)).withRel((UPDATE)));
+            return new ResponseEntity<>(clientDtoResult, HttpStatus.OK);
         } catch (ClientException e) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getMessage());
         }
     }
 
     @GetMapping(value = "/clients/by-nome")
-    public ResponseEntity<Page<Client>> findClientsByNome(@RequestParam(name = "nome") String nome, @PageableDefault(size = 5,
+    public ResponseEntity<Page<ClientDTO>> findClientsByNome(@RequestParam(name = "nome") String nome, @PageableDefault(size = 5,
             sort = "nome", direction = Sort.Direction.ASC) Pageable pageable) {
         log.info("Fetching client by nome");
 
@@ -95,11 +113,16 @@ public class ClientController {
         if (clients.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
-        return new ResponseEntity<>(clients, HttpStatus.OK);
+        return new ResponseEntity<>(clients.map(client -> {
+            ClientDTO clientDto = client.toDTO();
+            clientDto.add(linkTo(methodOn(ClientController.class).deleteClientById(clientDto.getId())).withRel((DELETE)));
+            clientDto.add(linkTo(methodOn(ClientController.class).updateClient(clientDto)).withRel((UPDATE)));
+            return clientDto;
+        }), HttpStatus.OK);
     }
 
     @GetMapping(value = "/clients/by-cep")
-    public ResponseEntity<Page<Client>> findClientsByCep(@RequestParam(name = "cep") String cep, @PageableDefault(size = 5,
+    public ResponseEntity<Page<ClientDTO>> findClientsByCep(@RequestParam(name = "cep") String cep, @PageableDefault(size = 5,
             sort = "nome", direction = Sort.Direction.ASC) Pageable pageable) {
         log.info("Fetching client by cep");
 
@@ -107,14 +130,22 @@ public class ClientController {
         if (clients.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
-        return new ResponseEntity<>(clients, HttpStatus.OK);
+        return new ResponseEntity<>(clients.map(client -> {
+            ClientDTO clientDto = client.toDTO();
+            clientDto.add(linkTo(methodOn(ClientController.class).deleteClientById(clientDto.getId())).withRel((DELETE)));
+            clientDto.add(linkTo(methodOn(ClientController.class).updateClient(clientDto)).withRel((UPDATE)));
+            return clientDto;
+        }), HttpStatus.OK);
     }
 
     @GetMapping(value = "/clients/by-email")
     public ResponseEntity<ClientDTO> findClientsByEmail(@RequestParam(name = "email") String email) {
         log.info("Fetching client by email");
         try {
-            return new ResponseEntity<>(clientService.findClientsByEmail(email).toDTO(), HttpStatus.OK);
+            ClientDTO clientDtoResult = clientService.findClientsByEmail(email).toDTO();
+            clientDtoResult.add(linkTo(methodOn(ClientController.class).deleteClientById(clientDtoResult.getId())).withRel((DELETE)));
+            clientDtoResult.add(linkTo(methodOn(ClientController.class).updateClient(clientDtoResult)).withRel((UPDATE)));
+            return new ResponseEntity<>(clientDtoResult, HttpStatus.OK);
         } catch (ClientException e) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getMessage());
         }

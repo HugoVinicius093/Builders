@@ -5,15 +5,17 @@ import com.builders.clientshandler.service.validation.constraints.Cep;
 import lombok.Builder;
 import lombok.Data;
 import org.hibernate.validator.constraints.br.CPF;
+import org.springframework.hateoas.RepresentationModel;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
+import java.io.Serializable;
 import java.util.Date;
 
 @Builder
 @Data
-public class ClientDTO {
+public class ClientDTO extends RepresentationModel<ClientDTO> implements Serializable {
 
     private Long id;
 
@@ -55,4 +57,5 @@ public class ClientDTO {
                 .email(this.email)
                 .dataNascimento(this.dataNascimento).build();
     }
+
 }
