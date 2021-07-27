@@ -45,7 +45,7 @@ docker-compose up -d
 ```
 
 O Comando acima criará o ambiente contendo API, PostgresSQL e Pgadmin.
-Agora está quase tudo pronto para que a aplicação seja testada, faltando apenas importar a collections disponiblizada no postman.
+Agora está quase tudo pronto para que a aplicação seja testada, faltando apenas importar a collection disponibilizada no postman.
 
 O PgAdmin permite que você manipule o banco de dados caso não tenha nenhuma outra ferramenta de administração. O mesmo pode ser acessado através do link http://localhost:16543/login
 
