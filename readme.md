@@ -15,7 +15,7 @@ Esse projeto possui:
 - Disponilidade para que os testes nas API's sejam feitos localmente via docker ou então utilizando o serviço em cloud hospedado no heroku.
 - Postman collection com testes já prontos para serem executados no ambiente local e cloud, arquivo está na raiz *Builders.postman_collection.json*
 
-## Tecnologias utilizdas
+## Tecnologias utilizadas
 
 - Java 1.8
 - PostgreSQL
