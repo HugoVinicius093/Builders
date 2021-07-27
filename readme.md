@@ -32,13 +32,7 @@ Esse projeto possui:
 
 ## Como Configurar:
 
-Após checado o repositório devemos ir até a raiz do projeto:
-
-```bash
-\clients-handler-api
-```
-
-Então executar o seguinte comando:
+Após checado o repositório devemos ir até a raiz do projeto, e então executar o seguinte comando:
 
 ```bash
 docker-compose up -d
